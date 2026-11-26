@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&family=Red+Hat+Text:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #111111;
+        --muted: #6b6b6b;
+        --border: #e2e2e2;
+        --surface: #f4f4f4;
+        --accent: #1a4be0;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0; width: 1920px; height: 1080px;
+        overflow: hidden; background: var(--bg);
+      }
+      #root {
+        width: 100%; height: 100%; position: relative;
+        font-family: "Red Hat Text", "Helvetica Neue", Arial, sans-serif;
+        color: var(--ink); background: var(--bg);
+      }
+      .scene { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+      .dotgrid {
+        position: absolute; inset: 0;
+        background-image: radial-gradient(circle, var(--border) 1.5px, transparent 1.6px);
+        background-size: 28px 28px;
+      }
+      .display { font-family: "Red Hat Display", "Helvetica Neue", Arial, sans-serif; font-weight: 500; }
+      .mark { display: flex; gap: 8px; }
+      .mark i { width: 18px; height: 18px; border-radius: 4px; background: var(--border); display: block; }
+      .mark i.on { background: var(--accent); }
+      .eyebrow {
+        font-size: 28px; letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--accent); font-weight: 700;
+      }
+      .browser {
+        border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+        background: #fff;
+      }
+      .browser img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+      .card {
+        border: 1px solid var(--border); border-radius: 16px;
+        background: #fff; padding: 28px 32px;
+      }
+      /* Scene 1 */
+      #s1 { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; text-align: center; }
+      #s1 h1 { font-size: 104px; line-height: 1.05; letter-spacing: -0.01em; max-width: 1500px; }
+      #s1 p { font-size: 32px; line-height: 1.5; color: var(--muted); max-width: 1100px; }
+      /* Scene 2 */
+      #s2 { display: flex; align-items: center; gap: 64px; padding: 0 96px; }
+      #s2 .copy { width: 560px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px; }
+      #s2 .copy h2 { font-size: 72px; line-height: 1.1; }
+      #s2 .copy p { font-size: 30px; line-height: 1.5; color: var(--muted); }
+      #s2 .frame { width: 1096px; height: 760px; }
+      /* Scene 3 */
+      #s3 { display: flex; align-items: center; gap: 64px; padding: 0 96px; }
+      #s3 .frame { width: 880px; height: 700px; flex-shrink: 0; }
+      #s3 .proofs { display: flex; flex-direction: column; gap: 24px; width: 784px; }
+      #s3 .proofs h2 { font-size: 60px; line-height: 1.1; margin-bottom: 8px; }
+      #s3 .card h3 { font-size: 36px; font-weight: 700; margin-bottom: 6px; }
+      #s3 .card p { font-size: 28px; color: var(--muted); }
+      #s3 .card .tag {
+        display: inline-block; font-size: 28px; font-weight: 700; color: var(--accent);
+        letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;
+      }
+      /* Scene 4 */
+      #s4 { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; text-align: center; }
+      #s4 h2 { font-size: 96px; line-height: 1.05; }
+      #s4 p { font-size: 32px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="20.19"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- Scene 1: Hook 0 - 3.27 -->
+      <div id="s1" class="scene clip" data-start="0" data-duration="3.82" data-track-index="0">
+        <div class="dotgrid"></div>
+        <div class="mark" id="s1-mark"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+        <h1 class="display" id="s1-title">Software Engineering &mdash; FUTO</h1>
+        <p id="s1-sub">One place for notices, timetables, courses and student builds.</p>
+      </div>
+
+      <!-- Scene 2: Portal reveal 3.82 - 8.74 // beat-locked out at 8.74s -->
+      <div id="s2" class="scene clip" data-start="3.82" data-duration="4.92" data-track-index="1">
+        <div class="copy">
+          <div class="eyebrow" id="s2-kicker">The student portal</div>
+          <h2 class="display" id="s2-title">Your level, on one screen.</h2>
+          <p id="s2-sub">Notices, timetable and courses for 100L &mdash; posted here first.</p>
+        </div>
+        <div class="browser frame" id="s2-frame">
+          <img src="assets/img/portal.png" alt="Student portal showing Today for 100L: notices, timetable and courses" />
+        </div>
+      </div>
+
+      <!-- Scene 3: Three proofs 8.74 - 15.29 -->
+      <div id="s3" class="scene clip" data-start="8.74" data-duration="6.55" data-track-index="2">
+        <div class="browser frame" id="s3-frame">
+          <img src="assets/img/timetable.png" alt="Weekly lecture timetable grid by level" />
+        </div>
+        <div class="proofs">
+          <h2 class="display" id="s3-title">Why it matters</h2>
+          <!-- // beat-grid: card 1 at 9.29s -->
+          <div class="card" id="proof1">
+            <div class="tag">Posted here first</div>
+            <h3 class="display">Notices beat the chat chaos.</h3>
+            <p>Every notice lands here before the class chats.</p>
+          </div>
+          <!-- // beat-grid: card 2 at 10.37s -->
+          <div class="card" id="proof2">
+            <div class="tag">100L &ndash; 500L</div>
+            <h3 class="display">Timetables by level.</h3>
+            <p>One weekly grid per level.</p>
+          </div>
+          <!-- // beat-grid: card 3 at 11.46s, holds; emphasis near strong cue 13.11s -->
+          <div class="card" id="proof3">
+            <div class="tag">Student builds</div>
+            <h3 class="display">Stack first, then the builders.</h3>
+            <p>Code, repos and the teams behind them.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 4: Outro 15.29 - 20.19 // beat-locked settle near 17.47s -->
+      <div id="s4" class="scene clip" data-start="15.29" data-duration="4.9" data-track-index="3">
+        <div class="dotgrid"></div>
+        <div class="mark" id="s4-mark"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+        <h2 class="display" id="s4-title">Software Engineering &mdash; FUTO</h2>
+        <p id="s4-sub">Demo for the HOD &middot; sample data.</p>
+      </div>
+
+      <!-- Audio: bed track 10, SFX ascending -->
+      <audio id="bg-music" data-start="0" data-duration="20.19" data-track-index="10"
+        data-volume="0.32" data-fade-out="1.7"
+        src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3"></audio>
+      <audio id="sfx-reveal" data-start="3.82" data-duration="1" data-track-index="11"
+        data-volume="0.7" src="assets/sfx/interface/drop_001.ogg"></audio>
+      <audio id="sfx-card1" data-start="9.29" data-duration="1" data-track-index="12"
+        data-volume="0.6" src="assets/sfx/interface/drop_001.ogg"></audio>
+      <audio id="sfx-card2" data-start="10.37" data-duration="1" data-track-index="13"
+        data-volume="0.6" src="assets/sfx/interface/drop_001.ogg"></audio>
+      <audio id="sfx-card3" data-start="11.46" data-duration="1" data-track-index="14"
+        data-volume="0.65" src="assets/sfx/interface/drop_001.ogg"></audio>
+      <audio id="sfx-outro" data-start="17.47" data-duration="1.5" data-track-index="15"
+        data-volume="0.7" src="assets/sfx/interface/bong_001.ogg"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // Scene 1: fast-in, then hold (mark is static so frame 0 is never empty)
+      tl.fromTo("#s1-title", { y: 40, scale: 0.98 }, { y: 0, scale: 1, duration: 0.5, ease: "power2.out" }, 0.05);
+      tl.fromTo("#s1-sub", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0.8);
+      tl.to("#s1", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 3.32);
+      // Scene 2: crossfade in at 3.82 (beat)
+      tl.fromTo("#s2", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.inOut" }, 3.82);
+      tl.fromTo("#s2-frame", { opacity: 0, scale: 0.98, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "power2.out" }, 3.82);
+      tl.fromTo("#s2-kicker", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 4.25);
+      tl.fromTo("#s2-title", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 4.45);
+      tl.fromTo("#s2-sub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 4.95);
+      tl.to("#s2-frame img", { scale: 1.05, duration: 3.4, ease: "none" }, 4.8);
+      tl.to("#s2", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 8.24);
+      // Scene 3: crossfade in at 8.74 // beat-locked
+      tl.fromTo("#s3", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.inOut" }, 8.74);
+      tl.fromTo("#s3-frame", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 8.74);
+      tl.fromTo("#s3-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 8.9);
+      tl.fromTo("#proof1", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 9.29);
+      tl.fromTo("#proof2", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 10.37);
+      tl.fromTo("#proof3", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 11.46);
+      tl.to("#s3", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 14.79);
+      // Scene 4: outro at 15.29, settle near 17.47 // beat-locked
+      tl.fromTo("#s4", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 15.29);
+      tl.fromTo("#s4-mark", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 15.6);
+      tl.fromTo("#s4-title", { opacity: 0, scale: 0.97, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "power2.out" }, 15.8);
+      tl.fromTo("#s4-sub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 16.9);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
